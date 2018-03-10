@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:href="@{/css/main.css}" rel="stylesheet"/>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>
+                <form action="getByProjectId" method="post">
+                    <input type="hidden" id="pId" th:value="${pId}"/>所属项目
+                    <select name="projectId">
+                        <option id="p0" value="0">全部</option>
+                        <option th:id="'p'+${project.id}"
+                                th:each="project : *{projects}"
+                                th:value="${project.id}"
+                                th:text="${project.name}">
+                        </option>
+                    </select>
+                    <input type="submit" value="查询"/>
+                </form>
+            </td>
+            <td>
+                增加<input value="增加Bug" type="button" onclick="window.location.href='toAddBug'"/>
+            </td>
+        </tr>
+    </table>
+    <table border="1px" id="mainTable">
+        <tr id="thead">
+            <td>Bug编号</td>
+            <td>严重性</td>
+            <td>标题</td>
+            <td>报告人</td>
+            <td>报告时间</td>
+        </tr>
+        <tr th:each="detail : *{details}">
+            <td th:text="${detail.id}"></td>
+            <div th:switch="${detail.severity}">
+                <td th:case="10">文字错误</td>
+                <td th:case="20">次要错误</td>
+                <td th:case="30">严重错误</td>
+            </div>
+            <td th:text="${detail.title}"></td>
+            <td th:text="${detail.reportUser}"></td>
+            <td th:text="${#dates.format(detail.createDate, 'MMM-dd-yyyy HH:mm:ss')}"></td>
+        </tr>
+    </table>
+</body>
+<script>
+    if (document.getElementById('pId').value != '')
+        document.getElementById('p' + document.getElementById('pId').value).selected = 'selected';
+
+</script>
+</html>

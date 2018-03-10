@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>添加Bug</title>
+
+</head>
+<body>
+    <form action="addBug" method="post">
+        <table>
+            <tr>
+                <td>所属项目</td>
+                <td>
+                    <select name="project.id">
+                        <option th:each="project : *{projects}"
+                                th:value="${project.id}"
+                                th:text="${project.name}">
+                        </option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>严重性</td>
+                <td>
+                    <select name="severity">
+                        <option value="10">文字错误</option>
+                        <option value="20">次要错误</option>
+                        <option value="30">严重错误</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Bug标题</td>
+                <td>
+                    <input name="title"/>
+                </td>
+            </tr>
+            <tr>
+                <td>报告人</td>
+                <td>
+                    <input name="reportUser"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="提交"/>
+                </td>
+                <td>
+                    <input type="button" value="返回"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
