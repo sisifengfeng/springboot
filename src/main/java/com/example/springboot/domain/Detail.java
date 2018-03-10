@@ -10,6 +10,7 @@ public class Detail {
     private String reportUser;
     private Timestamp createDate;
     private Project project;
+    private Double salary;
 
     public Detail() {
     }
